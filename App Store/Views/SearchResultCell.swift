@@ -10,7 +10,7 @@ import UIKit
 
 final class SearchResultCell: UICollectionViewCell {
     
-    private let imageView: UIImageView = {
+    private let appIconImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = .systemRed
         iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
@@ -44,34 +44,47 @@ final class SearchResultCell: UICollectionViewCell {
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
         button.backgroundColor = UIColor(white: 0.95, alpha: 1)
         button.widthAnchor.constraint(equalToConstant: 80).isActive = true
-//        button.heightAnchor.constraint(equalToConstant: 50).isActive = true // ?
+        button.heightAnchor.constraint(equalToConstant: 32).isActive = true // ?
         button.layer.cornerRadius = 16
         return button
     }()
     
+    lazy var screenshot1ImageView = self.createScreenshotImageView()
+    lazy var screenshot2ImageView = self.createScreenshotImageView()
+    lazy var screenshot3ImageView = self.createScreenshotImageView()
+    
+    private func createScreenshotImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .systemBlue
+        return imageView
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemYellow
-        
-        let labelsStackView = UIStackView(arrangedSubviews: [
-            nameLabel, categoryLabel, ratingsLabel
+        let infoTopStackView = UIStackView(arrangedSubviews: [
+            appIconImageView,
+            VerticalStackView(arrangedSubviews: [
+                nameLabel, categoryLabel, ratingsLabel
+            ]),
+            getButton
         ])
-        labelsStackView.axis = .vertical
+        infoTopStackView.spacing = 12
+        infoTopStackView.alignment = .center
         
-        let stackView = UIStackView(arrangedSubviews: [
-            imageView, labelsStackView, getButton
+        let screenshotsStackView = UIStackView(arrangedSubviews: [
+            screenshot1ImageView, screenshot2ImageView, screenshot3ImageView
         ])
-        stackView.spacing = 12
-        stackView.alignment = .center
+        screenshotsStackView.spacing = 12
+        screenshotsStackView.distribution = .fillEqually
         
-        addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let overallStackView = VerticalStackView(arrangedSubviews: [
+            infoTopStackView, screenshotsStackView
+        ], spacing: 16)
+        
+        addSubview(overallStackView)
         let padding: CGFloat = 16
-        stackView.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding).isActive = true
+        overallStackView.fillSuperview(padding: .init(top: padding, left: padding, bottom: padding, right: padding))
     }
     
     required init?(coder: NSCoder) {

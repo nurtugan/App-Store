@@ -42,6 +42,6 @@ final class AppsSearchController: UICollectionViewController {
 // MARK: - Collection View Delegate Flow Layout
 extension AppsSearchController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: view.frame.width, height: 250)
+        CGSize(width: view.frame.width, height: 350)
     }
 }
