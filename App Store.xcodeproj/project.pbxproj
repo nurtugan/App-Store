@@ -14,6 +14,7 @@
 		67B0DDF1245C57CA00E3ACC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67B0DDEF245C57CA00E3ACC4 /* LaunchScreen.storyboard */; };
 		67B0DDF9245C587D00E3ACC4 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0DDF8245C587D00E3ACC4 /* BaseTabBarController.swift */; };
 		67B0DDFE245C60C300E3ACC4 /* AppsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0DDFD245C60C300E3ACC4 /* AppsSearchController.swift */; };
+		67B0DE01245C73A200E3ACC4 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0DE00245C73A200E3ACC4 /* SearchResultCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		67B0DDF2245C57CA00E3ACC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67B0DDF8245C587D00E3ACC4 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		67B0DDFD245C60C300E3ACC4 /* AppsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsSearchController.swift; sourceTree = "<group>"; };
+		67B0DE00245C73A200E3ACC4 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				67B0DDFA245C605000E3ACC4 /* Application */,
 				67B0DDFB245C605B00E3ACC4 /* Controllers */,
+				67B0DDFF245C737400E3ACC4 /* Views */,
 				67B0DDFC245C607400E3ACC4 /* Supporting Files */,
 			);
 			path = "App Store";
@@ -92,6 +95,14 @@
 				67B0DDF2245C57CA00E3ACC4 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		67B0DDFF245C737400E3ACC4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				67B0DE00245C73A200E3ACC4 /* SearchResultCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +180,7 @@
 				67B0DDE5245C57C900E3ACC4 /* AppDelegate.swift in Sources */,
 				67B0DDE7245C57C900E3ACC4 /* SceneDelegate.swift in Sources */,
 				67B0DDFE245C60C300E3ACC4 /* AppsSearchController.swift in Sources */,
+				67B0DE01245C73A200E3ACC4 /* SearchResultCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
