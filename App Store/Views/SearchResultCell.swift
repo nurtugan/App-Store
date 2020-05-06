@@ -19,19 +19,19 @@ final class SearchResultCell: UICollectionViewCell {
         return iv
     }()
     
-    private let nameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "APP NAME"
         return label
     }()
     
-    private let categoryLabel: UILabel = {
+    let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "Photos & Video"
         return label
     }()
     
-    private let ratingsLabel: UILabel = {
+    let ratingsLabel: UILabel = {
         let label = UILabel()
         label.text = "9.26M"
         return label
@@ -49,9 +49,9 @@ final class SearchResultCell: UICollectionViewCell {
         return button
     }()
     
-    lazy var screenshot1ImageView = self.createScreenshotImageView()
-    lazy var screenshot2ImageView = self.createScreenshotImageView()
-    lazy var screenshot3ImageView = self.createScreenshotImageView()
+    private lazy var screenshot1ImageView = self.createScreenshotImageView()
+    private lazy var screenshot2ImageView = self.createScreenshotImageView()
+    private lazy var screenshot3ImageView = self.createScreenshotImageView()
     
     private func createScreenshotImageView() -> UIImageView {
         let imageView = UIImageView()

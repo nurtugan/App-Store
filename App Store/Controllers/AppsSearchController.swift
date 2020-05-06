@@ -11,12 +11,15 @@ import UIKit
 final class AppsSearchController: UICollectionViewController {
     
     private let cellID = "CellID"
+    private var appResults: [Result] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = . white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellID)
+        
+        fetchITunesApps()
     }
     
     init() {
@@ -27,16 +30,37 @@ final class AppsSearchController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Collection View Data source
+    // MARK: - Collection View Data Source
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! SearchResultCell
+        let appResult = appResults[indexPath.item]
+        cell.nameLabel.text = appResult.trackName
+        cell.categoryLabel.text = appResult.primaryGenreName
+        cell.ratingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        appResults.count
     }
     
+    // MARK: - Networking
+    private func fetchITunesApps() {
+        Service.shared.fetchApps { [weak self] results, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let self = self else {
+                assertionFailure()
+                return
+            }
+            self.appResults = results
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - Collection View Delegate Flow Layout
