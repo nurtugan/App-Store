@@ -1,5 +1,5 @@
 //
-//  AppsController.swift
+//  AppsHeaderHorizontalController.swift
 //  App Store
 //
 //  Created by Nurtugan Nuraly on 5/9/20.
@@ -8,19 +8,22 @@
 
 import UIKit
 
-final class AppsController: BaseListController {
-    let cellID = "cellID"
+final class AppsHeaderHorizontalController: BaseListController {
+    private let cellID = "cellID"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
-        collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: cellID)
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
     }
     
-    // MARK: - CV Data source
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        3
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -29,13 +32,12 @@ final class AppsController: BaseListController {
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension AppsController: UICollectionViewDelegateFlowLayout {
+extension AppsHeaderHorizontalController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: view.frame.width, height: 300)
+        .init(width: view.frame.width - 48, height: view.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .init(top: 16, left: 0, bottom: 0, right: 0)
+        .init(top: 0, left: 16, bottom: 0, right: 0)
     }
 }
