@@ -13,6 +13,16 @@ final class AppsSearchController: UICollectionViewController {
     
     private let cellID = "CellID"
     private var appResults: [Result] = []
+    private var timer: Timer?
+    
+    private var searchController = UISearchController(searchResultsController: nil)
+    private let enterSearchTermLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Please enter search term above..."
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +30,10 @@ final class AppsSearchController: UICollectionViewController {
         collectionView.backgroundColor = . white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellID)
         
-        fetchITunesApps()
+        collectionView.addSubview(enterSearchTermLabel)
+        enterSearchTermLabel.fillSuperview(padding: .init(top: 200, left: 50, bottom: 0, right: 50))
+        
+        setupSearchBar()
     }
     
     init() {
@@ -31,6 +44,14 @@ final class AppsSearchController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setupSearchBar() {
+        definesPresentationContext = true
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+    }
+    
     // MARK: - Collection View Data Source
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! SearchResultCell
@@ -39,12 +60,13 @@ final class AppsSearchController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        appResults.count
+        enterSearchTermLabel.isHidden = appResults.count != 0
+        return appResults.count
     }
     
     // MARK: - Networking
     private func fetchITunesApps() {
-        Service.shared.fetchApps { [weak self] results, error in
+        Service.shared.fetchApps(searchTerm: "Twitter") { [weak self] results, error in
             if let error = error {
                 print(error)
                 return
@@ -65,5 +87,19 @@ final class AppsSearchController: UICollectionViewController {
 extension AppsSearchController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.width, height: 350)
+    }
+}
+
+extension AppsSearchController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            Service.shared.fetchApps(searchTerm: searchText) { result, err in
+                self.appResults = result
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
     }
 }
