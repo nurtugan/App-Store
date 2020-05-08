@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-final class AppsSearchController: UICollectionViewController {
+final class AppsSearchController: BaseListController {
     
     private let cellID = "CellID"
     private var appResults: [Result] = []
@@ -27,21 +27,13 @@ final class AppsSearchController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = . white
+        collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellID)
         
         collectionView.addSubview(enterSearchTermLabel)
         enterSearchTermLabel.fillSuperview(padding: .init(top: 200, left: 50, bottom: 0, right: 50))
         
         setupSearchBar()
-    }
-    
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupSearchBar() {
@@ -65,7 +57,7 @@ final class AppsSearchController: UICollectionViewController {
     }
     
     // MARK: - Networking
-    private func fetchITunesApps() {
+    private func fetchITunesApps() { // FIXME: Then remove
         Service.shared.fetchApps(searchTerm: "Twitter") { [weak self] results, error in
             if let error = error {
                 print(error)
