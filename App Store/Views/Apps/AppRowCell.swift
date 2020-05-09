@@ -10,7 +10,7 @@ import UIKit
 
 final class AppRowCell: UICollectionViewCell {
     
-    let imageView = UIImageView(cornerRadius: 8)
+    let imageView = UIImageView(cornerRadius: 16)
     
     let nameLabel = UILabel(text: "App Name", font: .systemFont(ofSize: 20))
     let companyLabel = UILabel(text: "Company Name", font: .systemFont(ofSize: 13))

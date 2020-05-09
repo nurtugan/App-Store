@@ -67,7 +67,7 @@ final class AppsSearchController: BaseListController {
                 assertionFailure()
                 return
             }
-            self.appResults = results
+            self.appResults = results?.results ?? []
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -87,7 +87,7 @@ extension AppsSearchController: UISearchBarDelegate {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
             Service.shared.fetchApps(searchTerm: searchText) { result, err in
-                self.appResults = result
+                self.appResults = result?.results ?? []
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
