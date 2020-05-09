@@ -34,22 +34,30 @@ final class Service {
         }.resume()
     }
     
-    func fetchGames(compltion: @escaping (AppGroup?, Error?) -> Void) {
-        guard let url = URL(string: "https://rss.itunes.apple.com/api/v1/us/ios-apps/new-games-we-love/all/50/explicit.json") else { return }
+    func fetchTopGrossing(completion: @escaping (AppGroup?, Error?) -> Void) {
+        let urlString = "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-grossing/all/25/explicit.json"
+        fetchAppGroup(urlString: urlString, completion: completion)
+    }
+    
+    func fetchGames(completion: @escaping (AppGroup?, Error?) -> Void) {
+        let urlString = "https://rss.itunes.apple.com/api/v1/us/ios-apps/new-games-we-love/all/25/explicit.json"
+        fetchAppGroup(urlString: urlString, completion: completion)
+    }
+    
+    func fetchAppGroup(urlString: String, completion: @escaping (AppGroup?, Error?) -> Void) {
+        guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, resp, err in
             if let err = err {
-                compltion(nil, err)
+                completion(nil, err)
                 return
             }
             guard let data = data else { return }
             do {
                 let appGroup = try JSONDecoder().decode(AppGroup.self, from: data)
-                print(appGroup.feed.results)
-                compltion(appGroup, nil)
+                completion(appGroup, nil)
             } catch {
-                compltion(nil, error)
+                completion(nil, error)
             }
         }.resume()
     }
-    
 }

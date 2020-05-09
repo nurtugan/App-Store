@@ -23,6 +23,7 @@ final class AppRowCell: UICollectionViewCell {
         imageView.backgroundColor = .systemPurple
         imageView.constrainWidth(constant: 64)
         imageView.constrainHeight(constant: 64)
+        nameLabel.numberOfLines = 2
         
         getButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
         getButton.constrainWidth(constant: 80)
