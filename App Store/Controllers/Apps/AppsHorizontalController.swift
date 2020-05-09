@@ -13,6 +13,9 @@ final class AppsHorizontalController: HorizontalSnappingController {
     
     var appGroup: AppGroup?
     
+    // MARK: - Closure
+    var didSelectHandler: ((FeedResult) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,17 +24,25 @@ final class AppsHorizontalController: HorizontalSnappingController {
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
     
+    // MARK: - CV Data Source
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         appGroup?.feed.results.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AppRowCell
-        let app = appGroup?.feed.results[indexPath.row]
+        let app = appGroup?.feed.results[indexPath.item]
         cell.nameLabel.text = app?.name
         cell.companyLabel.text = app?.artistName
         cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
         return cell
+    }
+    
+    // MARK: - CV Delegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let app = appGroup?.feed.results[indexPath.item] {
+            didSelectHandler?(app)
+        }
     }
 }
 
