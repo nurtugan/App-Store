@@ -9,7 +9,7 @@
 import UIKit
 
 final class AppsPageHeader: UICollectionReusableView {
-    private let appHeaderHorizontalController = AppsHeaderHorizontalController()
+    let appHeaderHorizontalController = AppsHeaderHorizontalController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
