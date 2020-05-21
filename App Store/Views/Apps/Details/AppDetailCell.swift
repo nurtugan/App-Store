@@ -29,6 +29,13 @@ final class AppDetailCell: UICollectionViewCell {
     
     let releaseNotesLabel = UILabel(text: "Release Notes", font: .systemFont(ofSize: 18), numberOfLines: 0)
     
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.constrainHeight(constant: 1)
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -52,7 +59,8 @@ final class AppDetailCell: UICollectionViewCell {
                 ], spacing: 12)
             ], customSpacing: 20),
             whatsNewLabel,
-            releaseNotesLabel
+            releaseNotesLabel,
+            separatorView
         ], spacing: 16)
         addSubview(stackView)
         let padding: CGFloat = 20
