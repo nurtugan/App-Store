@@ -41,6 +41,8 @@ final class AppDetailCell: UICollectionViewCell {
         
         appIconImageView.constrainWidth(constant: 140)
         appIconImageView.constrainHeight(constant: 140)
+        appIconImageView.layer.borderWidth = 0.7
+        appIconImageView.layer.borderColor = UIColor.systemGray.cgColor
         
         priceButton.backgroundColor = .systemBlue
         priceButton.constrainHeight(constant: 32)
@@ -64,7 +66,7 @@ final class AppDetailCell: UICollectionViewCell {
         ], spacing: 16)
         addSubview(stackView)
         let padding: CGFloat = 20
-        stackView.fillSuperview(padding: .init(top: padding, left: padding, bottom: padding, right: padding))
+        stackView.fillSuperview(padding: .init(top: padding, left: padding, bottom: 8, right: padding))
     }
     
     required init?(coder: NSCoder) {

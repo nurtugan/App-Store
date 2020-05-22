@@ -56,6 +56,13 @@ final class AppsSearchController: BaseListController {
         return appResults.count
     }
     
+    // MARK: - Collection View Delegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let appID = appResults[indexPath.item].trackId.description
+        let appDetailController = AppDetailController(appID: appID)
+        navigationController?.pushViewController(appDetailController, animated: true)
+    }
+    
     // MARK: - Networking
     private func fetchITunesApps() { // FIXME: Then remove
         Service.shared.fetchApps(searchTerm: "Twitter") { [weak self] results, error in
@@ -86,7 +93,11 @@ extension AppsSearchController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-            Service.shared.fetchApps(searchTerm: searchText) { result, err in
+            Service.shared.fetchApps(searchTerm: searchText) { result, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
                 self.appResults = result?.results ?? []
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()

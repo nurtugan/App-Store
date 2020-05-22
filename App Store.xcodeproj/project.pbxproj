@@ -37,6 +37,10 @@
 		67B0DE09245DCC4400E3ACC4 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0DE08245DCC4400E3ACC4 /* SearchResult.swift */; };
 		67DE79CC2476F32400DD74DF /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE79CB2476F32400DD74DF /* PreviewCell.swift */; };
 		67DE79CE2476F59A00DD74DF /* PreviewScreenshotsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE79CD2476F59A00DD74DF /* PreviewScreenshotsController.swift */; };
+		67DE79D02477015C00DD74DF /* ReviewRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE79CF2477015C00DD74DF /* ReviewRowCell.swift */; };
+		67DE79D82478033700DD74DF /* ReviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE79D72478033700DD74DF /* ReviewsController.swift */; };
+		67DE79DA2478230600DD74DF /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE79D92478230600DD74DF /* ReviewCell.swift */; };
+		67DE79DC247828DA00DD74DF /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE79DB247828DA00DD74DF /* Reviews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +75,10 @@
 		67B0DE08245DCC4400E3ACC4 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		67DE79CB2476F32400DD74DF /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
 		67DE79CD2476F59A00DD74DF /* PreviewScreenshotsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreenshotsController.swift; sourceTree = "<group>"; };
+		67DE79CF2477015C00DD74DF /* ReviewRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRowCell.swift; sourceTree = "<group>"; };
+		67DE79D72478033700DD74DF /* ReviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsController.swift; sourceTree = "<group>"; };
+		67DE79D92478230600DD74DF /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		67DE79DB247828DA00DD74DF /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +98,8 @@
 			children = (
 				67236921246B0EE300E1AFC3 /* AppDetailCell.swift */,
 				67DE79CB2476F32400DD74DF /* PreviewCell.swift */,
+				67DE79CF2477015C00DD74DF /* ReviewRowCell.swift */,
+				67DE79D92478230600DD74DF /* ReviewCell.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -126,6 +136,7 @@
 			children = (
 				677F072124671CF300DA0915 /* AppDetailController.swift */,
 				67DE79CD2476F59A00DD74DF /* PreviewScreenshotsController.swift */,
+				67DE79D72478033700DD74DF /* ReviewsController.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -230,6 +241,7 @@
 				67B0DE08245DCC4400E3ACC4 /* SearchResult.swift */,
 				677F07182465FF6100DA0915 /* AppGroup.swift */,
 				677F071A2466A74700DA0915 /* SocialApp.swift */,
+				67DE79DB247828DA00DD74DF /* Reviews.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -314,12 +326,14 @@
 				67B0DDF9245C587D00E3ACC4 /* BaseTabBarController.swift in Sources */,
 				677F071F2466EE4100DA0915 /* BetterSnappingLayout.swift in Sources */,
 				67B0DDE5245C57C900E3ACC4 /* AppDelegate.swift in Sources */,
+				67DE79DA2478230600DD74DF /* ReviewCell.swift in Sources */,
 				677F071B2466A74700DA0915 /* SocialApp.swift in Sources */,
 				67B0DE09245DCC4400E3ACC4 /* SearchResult.swift in Sources */,
 				677F07192465FF6100DA0915 /* AppGroup.swift in Sources */,
 				677AC8862465DEA200D58143 /* AppsPageController.swift in Sources */,
 				6782F6A22465F81100DCA1F1 /* AppsHeaderCell.swift in Sources */,
 				67B0DDE7245C57C900E3ACC4 /* SceneDelegate.swift in Sources */,
+				67DE79D02477015C00DD74DF /* ReviewRowCell.swift in Sources */,
 				677AC8882465DF4000D58143 /* BaseListController.swift in Sources */,
 				67236922246B0EE300E1AFC3 /* AppDetailCell.swift in Sources */,
 				6782F69A2465EA7800DCA1F1 /* AppRowCell.swift in Sources */,
@@ -329,6 +343,8 @@
 				6782F69E2465F2AE00DCA1F1 /* AppsPageHeader.swift in Sources */,
 				677AC87424631F1900D58143 /* Service.swift in Sources */,
 				67DE79CC2476F32400DD74DF /* PreviewCell.swift in Sources */,
+				67DE79D82478033700DD74DF /* ReviewsController.swift in Sources */,
+				67DE79DC247828DA00DD74DF /* Reviews.swift in Sources */,
 				6782F69C2465EB3000DCA1F1 /* Extensions.swift in Sources */,
 				67B0DE04245C7C4600E3ACC4 /* UIView+Layout.swift in Sources */,
 				67B0DE01245C73A200E3ACC4 /* SearchResultCell.swift in Sources */,

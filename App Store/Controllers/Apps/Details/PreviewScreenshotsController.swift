@@ -22,6 +22,9 @@ final class PreviewScreenshotsController: HorizontalSnappingController {
         
         override init(frame: CGRect) {
             super.init(frame: frame)
+            
+            imageView.layer.borderWidth = 0.7
+            imageView.layer.borderColor = UIColor.systemGray.cgColor
             addSubview(imageView)
             imageView.fillSuperview()
         }
