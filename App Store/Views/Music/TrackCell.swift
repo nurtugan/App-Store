@@ -9,16 +9,16 @@
 import UIKit
 
 final class TrackCell: UICollectionViewCell {
-    private let imageView = UIImageView(cornerRadius: 16)
-    private let nameLabel = UILabel(text: "Track Name", font: .boldSystemFont(ofSize: 18))
-    private let subTitleLabel = UILabel(text: "Sub Title Label", font: .systemFont(ofSize: 16), numberOfLines: 2)
+    let imageView = UIImageView(cornerRadius: 8)
+    let nameLabel = UILabel(text: "Track Name", font: .boldSystemFont(ofSize: 18))
+    let subTitleLabel = UILabel(text: "Sub Title Label", font: .systemFont(ofSize: 16), numberOfLines: 2)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView.image = #imageLiteral(resourceName: "garden")
-        imageView.constrainWidth(constant: 80)
-//        imageView.constrainHeight(constant: 80)
+        imageView.image = nil
+//        imageView.constrainWidth(constant: 80)
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1).isActive = true
         
         let stackView = UIStackView(arrangedSubviews: [
             imageView,

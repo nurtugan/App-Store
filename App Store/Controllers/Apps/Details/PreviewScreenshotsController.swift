@@ -44,12 +44,12 @@ final class PreviewScreenshotsController: HorizontalSnappingController {
     
     // MARK: - CV Data Source
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        app?.screenshotUrls.count ?? 0
+        app?.screenshotUrls?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ScreenshotCell
-        let screenshotURL = app?.screenshotUrls[indexPath.item]
+        let screenshotURL = app?.screenshotUrls?[indexPath.item]
         cell.imageView.sd_setImage(with: URL(string: screenshotURL ?? ""))
         return cell
     }
