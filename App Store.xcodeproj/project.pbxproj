@@ -28,6 +28,7 @@
 		6782F6A22465F81100DCA1F1 /* AppsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6782F6A12465F81100DCA1F1 /* AppsHeaderCell.swift */; };
 		67939C1A247C1FB30044B8CB /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67939C19247C1FB30044B8CB /* TrackCell.swift */; };
 		67939C1C247C230B0044B8CB /* MusicLoadingFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67939C1B247C230B0044B8CB /* MusicLoadingFooter.swift */; };
+		67939C1F247C35A30044B8CB /* AppsCompositionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67939C1E247C35A30044B8CB /* AppsCompositionalView.swift */; };
 		67B0DDE5245C57C900E3ACC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0DDE4245C57C900E3ACC4 /* AppDelegate.swift */; };
 		67B0DDE7245C57C900E3ACC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0DDE6245C57C900E3ACC4 /* SceneDelegate.swift */; };
 		67B0DDEC245C57C900E3ACC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67B0DDEA245C57C900E3ACC4 /* Main.storyboard */; };
@@ -78,6 +79,7 @@
 		6782F6A12465F81100DCA1F1 /* AppsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderCell.swift; sourceTree = "<group>"; };
 		67939C19247C1FB30044B8CB /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 		67939C1B247C230B0044B8CB /* MusicLoadingFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLoadingFooter.swift; sourceTree = "<group>"; };
+		67939C1E247C35A30044B8CB /* AppsCompositionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsCompositionalView.swift; sourceTree = "<group>"; };
 		67B0DDE1245C57C900E3ACC4 /* App Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Store.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67B0DDE4245C57C900E3ACC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67B0DDE6245C57C900E3ACC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		677AC8842465DE9600D58143 /* Apps */ = {
 			isa = PBXGroup;
 			children = (
+				67939C1D247C356A0044B8CB /* Compositional */,
 				677F072024671CDF00DA0915 /* Details */,
 				677AC8852465DEA200D58143 /* AppsPageController.swift */,
 				6782F6972465E53300DCA1F1 /* AppsHorizontalController.swift */,
@@ -196,6 +199,14 @@
 				67939C1B247C230B0044B8CB /* MusicLoadingFooter.swift */,
 			);
 			path = Music;
+			sourceTree = "<group>";
+		};
+		67939C1D247C356A0044B8CB /* Compositional */ = {
+			isa = PBXGroup;
+			children = (
+				67939C1E247C35A30044B8CB /* AppsCompositionalView.swift */,
+			);
+			path = Compositional;
 			sourceTree = "<group>";
 		};
 		67B0DDD8245C57C900E3ACC4 = {
@@ -401,6 +412,7 @@
 				677F071F2466EE4100DA0915 /* BetterSnappingLayout.swift in Sources */,
 				67B0DDE5245C57C900E3ACC4 /* AppDelegate.swift in Sources */,
 				67DE79DA2478230600DD74DF /* ReviewCell.swift in Sources */,
+				67939C1F247C35A30044B8CB /* AppsCompositionalView.swift in Sources */,
 				67B540302478FA9B00A4C0FC /* AppFullscreenController.swift in Sources */,
 				67939C1C247C230B0044B8CB /* MusicLoadingFooter.swift in Sources */,
 				677F071B2466A74700DA0915 /* SocialApp.swift in Sources */,
