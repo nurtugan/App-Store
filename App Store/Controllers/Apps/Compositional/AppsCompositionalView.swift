@@ -8,9 +8,25 @@
 
 import SwiftUI
 
+final class CompositionalHeader: UICollectionReusableView {
+    private let label = UILabel(text: "Editor's Choise Games", font: .boldSystemFont(ofSize: 32))
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(label)
+        label.fillSuperview()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+}
+
 final class CompositionalController: UICollectionViewController {
-    private let headerCellID = "headerCellID"
+    private let headerID = "headerID"
     private let defaultCellID = "defaultCellID"
+    private let sectionHeaderID = "sectionHeaderID"
     
     private static let cellWidth: CGFloat = 0.8
     
@@ -27,6 +43,11 @@ final class CompositionalController: UICollectionViewController {
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPaging
                 section.contentInsets.leading = 16
+                
+                let kind = UICollectionView.elementKindSectionHeader
+                section.boundarySupplementaryItems = [
+                    .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: kind, alignment: .topLeading)
+                ]
                 
                 return section
             }
@@ -57,15 +78,16 @@ final class CompositionalController: UICollectionViewController {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: headerCellID)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: defaultCellID)
+        collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: headerID)
+        collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: defaultCellID)
+        collectionView.register(CompositionalHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         
         navigationItem.title = "Apps"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        4
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -75,13 +97,17 @@ final class CompositionalController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: headerCellID, for: indexPath) as! AppsHeaderCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: headerID, for: indexPath) as! AppsHeaderCell
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: defaultCellID, for: indexPath)
-            cell.backgroundColor = .blue
             return cell
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderID, for: indexPath) as! CompositionalHeader
+        return header
     }
 }
 
