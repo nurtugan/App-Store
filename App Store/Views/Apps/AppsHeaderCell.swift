@@ -17,9 +17,9 @@ final class AppsHeaderCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView.image = #imageLiteral(resourceName: "holiday")
         companyLabel.textColor = .systemBlue
         titleLabel.numberOfLines = 2
+        imageView.contentMode = .scaleAspectFill
         
         let stackView = VerticalStackView(arrangedSubviews: [companyLabel, titleLabel, imageView], spacing: 12)
         addSubview(stackView)
