@@ -10,6 +10,14 @@ import UIKit
 
 final class AppsHeaderCell: UICollectionViewCell {
     
+    var socialApp: SocialApp! {
+        didSet {
+            companyLabel.text = socialApp.name
+            titleLabel.text = socialApp.tagline
+            imageView.sd_setImage(with: URL(string: socialApp.imageUrl))
+        }
+    }
+    
     let companyLabel = UILabel(text: "Facebook", font: .boldSystemFont(ofSize: 14))
     let titleLabel = UILabel(text: "Keeping up with friends is faster than ever", font: .systemFont(ofSize: 24))
     let imageView  = UIImageView(cornerRadius: 8)
