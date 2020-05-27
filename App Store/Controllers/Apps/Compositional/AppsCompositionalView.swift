@@ -11,7 +11,8 @@ import SwiftUI
 enum AppSection {
     case topSocial
     case grossing
-    case freeGames
+    case games
+    case topFree
 }
 
 final class CompositionalHeader: UICollectionReusableView {
@@ -106,9 +107,12 @@ final class CompositionalController: UICollectionViewController {
         collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: headerID)
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: defaultCellID)
         collectionView.register(CompositionalHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         
         navigationItem.title = "Apps"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = .init(title: "Fetch Top Free", style: .plain, target: self, action: #selector(handleFetchTopFree))
         
 //        fetchApps()
         
@@ -119,26 +123,26 @@ final class CompositionalController: UICollectionViewController {
         0
     }
     
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderID, for: indexPath) as! CompositionalHeader
-        var title: String?
-        switch indexPath.section {
-        case 1:
-            title = gamesGroup?.feed.title
-        case 2:
-            title = topGrossingApps?.feed.title
-        case 3:
-            title = freeApps?.feed.title
-        default:
-            return header
-        }
-        header.label.text = title
-        return header
-    }
+//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderID, for: indexPath) as! CompositionalHeader
+//        var title: String?
+//        switch indexPath.section {
+//        case 1:
+//            title = gamesGroup?.feed.title
+//        case 2:
+//            title = topGrossingApps?.feed.title
+//        case 3:
+//            title = freeApps?.feed.title
+//        default:
+//            return header
+//        }
+//        header.label.text = title
+//        return header
+//    }
     
     // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var appID: String!
+        var appID = ""
         let object = diffableDataSource.itemIdentifier(for: indexPath)
         if let object = object as? SocialApp {
             appID = object.id
@@ -158,10 +162,12 @@ final class CompositionalController: UICollectionViewController {
             let object = self.diffableDataSource.itemIdentifier(for: indexPath)
             let section = snapshot.sectionIdentifier(containingItem: object!)!
             switch section {
-            case .freeGames:
+            case .games:
                 header.label.text = "Games"
             case .grossing:
                 header.label.text = "Top Grossing"
+            case .topFree:
+                header.label.text = "Top Free"
             default:
                 break
             }
@@ -173,7 +179,7 @@ final class CompositionalController: UICollectionViewController {
                 Service.shared.fetchGames { gamesGroup, error in
                     var snapshot = self.diffableDataSource.snapshot()
                     
-                    snapshot.appendSections([.topSocial, .freeGames, .grossing])
+                    snapshot.appendSections([.topSocial, .games, .grossing])
                     
                     snapshot.appendItems(socialApps ?? [], toSection: .topSocial)
                     
@@ -181,7 +187,7 @@ final class CompositionalController: UICollectionViewController {
                     snapshot.appendItems(objects, toSection: .grossing)
                     
                     let games = gamesGroup?.feed.results ?? []
-                    snapshot.appendItems(games, toSection: .freeGames)
+                    snapshot.appendItems(games, toSection: .games)
                     
                     self.diffableDataSource.apply(snapshot)
                 }
@@ -203,6 +209,24 @@ final class CompositionalController: UICollectionViewController {
             }
             superview = superview?.superview
         }
+    }
+    
+    @objc
+    private func handleFetchTopFree() {
+        Service.shared.fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-free/all/25/explicit.json") { appGroup, error in
+            var snapshot = self.diffableDataSource.snapshot()
+            snapshot.insertSections([.topFree], afterSection: .topSocial)
+            snapshot.appendItems(appGroup?.feed.results ?? [], toSection: .topFree)
+            self.diffableDataSource.apply(snapshot)
+        }
+    }
+    
+    @objc
+    private func handleRefresh() {
+        collectionView.refreshControl?.endRefreshing()
+        var snapshot = diffableDataSource.snapshot()
+        snapshot.deleteSections([.topFree])
+        diffableDataSource.apply(snapshot)
     }
     
     private func fetchApps() {
