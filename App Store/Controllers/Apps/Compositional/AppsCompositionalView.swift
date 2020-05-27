@@ -119,27 +119,6 @@ final class CompositionalController: UICollectionViewController {
         setupDiffableDataSource()
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        0
-    }
-    
-//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderID, for: indexPath) as! CompositionalHeader
-//        var title: String?
-//        switch indexPath.section {
-//        case 1:
-//            title = gamesGroup?.feed.title
-//        case 2:
-//            title = topGrossingApps?.feed.title
-//        case 3:
-//            title = freeApps?.feed.title
-//        default:
-//            return header
-//        }
-//        header.label.text = title
-//        return header
-//    }
-    
     // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var appID = ""
