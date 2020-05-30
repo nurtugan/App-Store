@@ -15,7 +15,7 @@ final class AppFullscreenController: UIViewController {
     // MARK: - UI
     let closeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "close_button"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "close-button"), for: .normal)
         return button
     }()
     let tableView = UITableView(frame: .zero, style: .plain)

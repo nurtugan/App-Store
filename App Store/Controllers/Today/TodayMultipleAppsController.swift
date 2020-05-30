@@ -22,7 +22,7 @@ final class TodayMultipleAppsController: BaseListController {
     // MARK: - UI
     let closeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "close_button"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "close-button"), for: .normal)
         button.tintColor = .darkGray
         button.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
         return button
