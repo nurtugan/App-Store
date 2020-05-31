@@ -12,7 +12,7 @@ App architecture: __MVCS__
 - [x] Dispatch Group 
 - [x] Auto Layout Constraint Animations
 - [x] Generics JSON Fetching
-- [x] No Storyboard
+- [x] No Storyboards
 
 ## Dependency
 + [__SDWebImage__ - Asynchronous image downloader with cache support as a UIImageView category](https://github.com/SDWebImage/SDWebImage)
