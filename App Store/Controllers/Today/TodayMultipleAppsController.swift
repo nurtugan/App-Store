@@ -48,7 +48,7 @@ final class TodayMultipleAppsController: BaseListController {
         } else {
             collectionView.isScrollEnabled = false
         }
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .tertiarySystemBackground
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellID)
     }
     

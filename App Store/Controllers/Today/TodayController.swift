@@ -82,7 +82,7 @@ final class TodayController: BaseListController {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             self.blurVisualEffectView.alpha = 0
             self.appFullscreenController.view.transform = .identity
-            self.appFullscreenController.tableView.contentOffset = .zero
+            self.appFullscreenController.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             guard let startingFrame = self.startingFrame else { return }
             
             self.anchoredConstraints?.top?.constant = startingFrame.origin.y
@@ -251,9 +251,9 @@ final class TodayController: BaseListController {
         dispatchGroup.notify(queue: .main) {
             self.activityIndicatorView.stopAnimating()
             self.items = [
-                TodayItem(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently organize your life the right way.", backgroundColor: .white, cellType: .single, apps: []),
-                TodayItem(category: "THE DAILY LIST", title: topGrossingGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple, apps: topGrossingGroup?.feed.results ?? []),
-                TodayItem(category: "THE DAILY LIST", title: gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple, apps: gamesGroup?.feed.results ?? []),
+                TodayItem(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently organize your life the right way.", backgroundColor: .tertiarySystemBackground, cellType: .single, apps: []),
+                TodayItem(category: "THE DAILY LIST", title: topGrossingGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .tertiarySystemBackground, cellType: .multiple, apps: topGrossingGroup?.feed.results ?? []),
+                TodayItem(category: "THE DAILY LIST", title: gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .tertiarySystemBackground, cellType: .multiple, apps: gamesGroup?.feed.results ?? []),
                 TodayItem(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything!", backgroundColor: #colorLiteral(red: 0.9853100181, green: 0.9683170915, blue: 0.7212222219, alpha: 1), cellType: .single, apps: [])
             ]
             self.collectionView.reloadData()

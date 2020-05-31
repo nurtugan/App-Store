@@ -13,7 +13,7 @@ final class SearchResultCell: UICollectionViewCell {
         didSet {
             nameLabel.text = appResult.trackName
             categoryLabel.text = appResult.primaryGenreName
-            ratingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
+            ratingsLabel.text = "Rating: " + String(format: "%.1f", appResult.averageUserRating ?? 0)
             appIconImageView.setImage(with: appResult.artworkUrl100)
             screenshot1ImageView.setImage(with: appResult.screenshotUrls![0])
             if appResult.screenshotUrls?.count ?? 0 > 2 {
@@ -25,7 +25,7 @@ final class SearchResultCell: UICollectionViewCell {
         }
     }
     
-    let appIconImageView: UIImageView = {
+    private let appIconImageView: UIImageView = {
         let iv = UIImageView()
         iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
@@ -34,19 +34,19 @@ final class SearchResultCell: UICollectionViewCell {
         return iv
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "APP NAME"
         return label
     }()
     
-    let categoryLabel: UILabel = {
+    private let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "Photos & Video"
         return label
     }()
     
-    let ratingsLabel: UILabel = {
+    private let ratingsLabel: UILabel = {
         let label = UILabel()
         label.text = "9.26M"
         return label
@@ -57,16 +57,16 @@ final class SearchResultCell: UICollectionViewCell {
         button.setTitle("GET", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        button.backgroundColor = .quaternarySystemFill
         button.widthAnchor.constraint(equalToConstant: 80).isActive = true
         button.heightAnchor.constraint(equalToConstant: 32).isActive = true
         button.layer.cornerRadius = 16
         return button
     }()
     
-    lazy var screenshot1ImageView = self.createScreenshotImageView()
-    lazy var screenshot2ImageView = self.createScreenshotImageView()
-    lazy var screenshot3ImageView = self.createScreenshotImageView()
+    private lazy var screenshot1ImageView = self.createScreenshotImageView()
+    private lazy var screenshot2ImageView = self.createScreenshotImageView()
+    private lazy var screenshot3ImageView = self.createScreenshotImageView()
     
     private func createScreenshotImageView() -> UIImageView {
         let imageView = UIImageView()

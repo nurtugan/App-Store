@@ -32,7 +32,7 @@ final class MultipleAppCell: UICollectionViewCell {
         imageView.constrainWidth(constant: 64)
         imageView.constrainHeight(constant: 64)
         
-        getButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        getButton.backgroundColor = .quaternarySystemFill
         getButton.constrainWidth(constant: 80)
         getButton.constrainHeight(constant: 32)
         getButton.layer.cornerRadius = 16

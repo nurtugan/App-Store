@@ -32,7 +32,7 @@ final class TodayCell: BaseTodayCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = .tertiarySystemBackground
         layer.cornerRadius = 16
 
         let imageContainerView = UIView()

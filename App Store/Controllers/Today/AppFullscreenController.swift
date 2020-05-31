@@ -125,6 +125,7 @@ extension AppFullscreenController: UITableViewDelegate {
         }
         let translationY = -floatingContainerView.frame.height - statusBarHeight
         let transform = scrollView.contentOffset.y > 100 ? CGAffineTransform(translationX: 0, y: translationY) : .identity
+        scrollView.contentInset.bottom = transform == .identity ? 0 : -translationY
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             self.floatingContainerView.transform = transform
         })
