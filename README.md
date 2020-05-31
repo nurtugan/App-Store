@@ -5,7 +5,7 @@ App architecture: __MVCS__
 
 ## Covered topics
 - [x] Dark Mode
-- [x] UICollectionView Diffable Datasource
+- [x] UICollectionView Diffable Data Source
 - [x] UICollectionView Compositional Layout
 - [x] Pagination Data Fetch
 - [x] Exact Animations/Transitions as in App Store 
