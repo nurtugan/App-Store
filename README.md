@@ -3,8 +3,19 @@
 
 App architecture: __MVCS__
 
+## Covered topics
+- [x] Dark Mode
+- [x] UICollectionView Diffable Datasource
+- [x] UICollectionView Compositional Layout
+- [x] Pagination Data Fetch
+- [x] Exact Animations/Transitions as in App Store 
+- [x] Dispatch Group 
+- [x] Auto Layout Constraint Animations
+- [x] Generics JSON Fetching
+- [x] No Storyboard
+
 ## Dependency
-+ [SDWebImage](https://github.com/SDWebImage/SDWebImage)
++ [__SDWebImage__ - Asynchronous image downloader with cache support as a UIImageView category](https://github.com/SDWebImage/SDWebImage)
 
 ## Today Tab
 <table align="center">
