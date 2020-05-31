@@ -39,8 +39,8 @@ final class TodayCell: BaseTodayCell {
         imageContainerView.addSubview(imageView)
         imageContainerView.clipsToBounds = true
         imageView.centerInSuperview(size: .init(width: 240, height: 240))
-
         imageView.contentMode = .scaleAspectFill
+        
         let stackView = VerticalStackView(arrangedSubviews: [
             categoryLabel, titleLabel, imageContainerView, descriptionLabel
         ], spacing: 8)
