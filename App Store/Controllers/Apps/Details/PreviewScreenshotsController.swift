@@ -30,14 +30,14 @@ final class PreviewScreenshotsController: HorizontalSnappingController {
         }
         
         required init?(coder: NSCoder) {
-            fatalError()
+            fatalError("init(coder:) has not been implemented")
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(ScreenshotCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
@@ -50,7 +50,7 @@ final class PreviewScreenshotsController: HorizontalSnappingController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ScreenshotCell
         let screenshotURL = app?.screenshotUrls?[indexPath.item]
-        cell.imageView.sd_setImage(with: URL(string: screenshotURL ?? ""))
+        cell.imageView.setImage(with: screenshotURL)
         return cell
     }
 }

@@ -34,7 +34,7 @@ class BaseTodayCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func shouldHighlight(_ isHighlighted: Bool) {

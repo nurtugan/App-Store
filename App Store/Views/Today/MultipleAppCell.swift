@@ -13,11 +13,11 @@ final class MultipleAppCell: UICollectionViewCell {
         didSet {
             nameLabel.text = app.name
             companyLabel.text = app.artistName
-            imageView.sd_setImage(with: URL(string: app.artworkUrl100))
+            imageView.setImage(with: app.artworkUrl100)
         }
     }
     private let imageView = UIImageView(cornerRadius: 10)
-    private let nameLabel = UILabel(text: "App Name", font: .systemFont(ofSize: 16))
+    private let nameLabel = UILabel(text: "App Name", font: .systemFont(ofSize: 16), numberOfLines: 2)
     private let companyLabel = UILabel(text: "Company Name", font: .systemFont(ofSize: 12))
     private let getButton = UIButton(title: "GET")
     private let separatorView: UIView = {
@@ -31,7 +31,6 @@ final class MultipleAppCell: UICollectionViewCell {
         
         imageView.constrainWidth(constant: 64)
         imageView.constrainHeight(constant: 64)
-        nameLabel.numberOfLines = 2
         
         getButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
         getButton.constrainWidth(constant: 80)
@@ -54,6 +53,6 @@ final class MultipleAppCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 }

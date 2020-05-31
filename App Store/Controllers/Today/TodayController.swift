@@ -18,7 +18,7 @@ final class TodayController: BaseListController {
     
     // MARK: - Animation properties
     private var startingFrame: CGRect?
-    private var anchoredConstraint: AnchoredConstraints?
+    private var anchoredConstraints: AnchoredConstraints?
     private var appFullScreenBeginOffsetY: CGFloat = 0
     
     // MARK: - UI
@@ -85,10 +85,10 @@ final class TodayController: BaseListController {
             self.appFullscreenController.tableView.contentOffset = .zero
             guard let startingFrame = self.startingFrame else { return }
             
-            self.anchoredConstraint?.top?.constant = startingFrame.origin.y
-            self.anchoredConstraint?.leading?.constant = startingFrame.origin.x
-            self.anchoredConstraint?.width?.constant = startingFrame.width
-            self.anchoredConstraint?.height?.constant = startingFrame.height
+            self.anchoredConstraints?.top?.constant = startingFrame.origin.y
+            self.anchoredConstraints?.leading?.constant = startingFrame.origin.x
+            self.anchoredConstraints?.width?.constant = startingFrame.width
+            self.anchoredConstraints?.height?.constant = startingFrame.height
             
             self.view.layoutIfNeeded() // Starts animation
             self.setTabBarHidden(false) // Showing tab bar
@@ -197,7 +197,7 @@ final class TodayController: BaseListController {
         guard let startingFrame = startingFrame else { return }
         
         // MARK: - Configuring constraints
-        anchoredConstraint = fullscreenView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: startingFrame.origin.y, left: startingFrame.origin.x, bottom: 0, right: 0), size: .init(width: startingFrame.width, height: startingFrame.height))
+        anchoredConstraints = fullscreenView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: startingFrame.origin.y, left: startingFrame.origin.x, bottom: 0, right: 0), size: .init(width: startingFrame.width, height: startingFrame.height))
         view.layoutIfNeeded()
     }
     
@@ -205,10 +205,10 @@ final class TodayController: BaseListController {
         // MARK: - Animating constraints
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             self.blurVisualEffectView.alpha = 1
-            self.anchoredConstraint?.top?.constant = 0
-            self.anchoredConstraint?.leading?.constant = 0
-            self.anchoredConstraint?.width?.constant = self.view.frame.width
-            self.anchoredConstraint?.height?.constant = self.view.frame.height
+            self.anchoredConstraints?.top?.constant = 0
+            self.anchoredConstraints?.leading?.constant = 0
+            self.anchoredConstraints?.width?.constant = self.view.frame.width
+            self.anchoredConstraints?.height?.constant = self.view.frame.height
             self.view.layoutIfNeeded() // Starts animation
             self.setTabBarHidden(true) // Hiding tab bar
             self.updateTodayCellTopConstraint(constant: 48, closeButtonAlpha: 1) // Updating today cell's top constraint

@@ -13,9 +13,10 @@ final class AppDetailController: BaseListController {
     private let previewCellID = "previewCellID"
     private let reviewCellID = "reviewCellID"
     
-    private let appID: String
     private var app: Result?
     private var reviews: Reviews?
+    
+    private let appID: String
     
     init(appID: String) {
         self.appID = appID
@@ -23,13 +24,13 @@ final class AppDetailController: BaseListController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: detailCellID)
         collectionView.register(PreviewCell.self, forCellWithReuseIdentifier: previewCellID)
         collectionView.register(ReviewRowCell.self, forCellWithReuseIdentifier: reviewCellID)
@@ -68,15 +69,16 @@ final class AppDetailController: BaseListController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == 0 {
+        switch indexPath.item {
+        case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: detailCellID, for: indexPath) as! AppDetailCell
             cell.app = app
             return cell
-        } else if indexPath.item == 1 {
+        case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: previewCellID, for: indexPath) as! PreviewCell
             cell.horizontalController.app = app
             return cell
-        } else {
+        default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewCellID, for: indexPath) as! ReviewRowCell
             cell.reviewsController.reviews = reviews
             return cell
@@ -87,15 +89,16 @@ final class AppDetailController: BaseListController {
 extension AppDetailController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat = 280
-        if indexPath.item == 0 {
+        switch indexPath.item {
+        case 0:
             let dummyCell = AppDetailCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 1000))
             dummyCell.app = app
             dummyCell.layoutIfNeeded()
             let estimatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
             height = estimatedSize.height
-        } else if indexPath.item == 1 {
+        case 1:
             height = 500
-        } else {
+        default:
             height = 280
         }
         return .init(width: view.frame.width, height: height)

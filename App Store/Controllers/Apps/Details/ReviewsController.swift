@@ -20,7 +20,7 @@ final class ReviewsController: HorizontalSnappingController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: cellID)
     }

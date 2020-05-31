@@ -14,7 +14,7 @@ final class AppRowCell: UICollectionViewCell {
         didSet {
             companyLabel.text = app?.artistName
             nameLabel.text = app?.name
-            imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
+            imageView.setImage(with: app?.artworkUrl100)
         }
     }
     

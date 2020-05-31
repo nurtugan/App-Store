@@ -20,7 +20,7 @@ final class TodayMultipleAppsController: BaseListController {
     var apps: [FeedResult] = [] { didSet { collectionView.reloadData() } }
     
     // MARK: - UI
-    let closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "close-button"), for: .normal)
         button.tintColor = .darkGray
@@ -36,7 +36,7 @@ final class TodayMultipleAppsController: BaseListController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Lifecycle
@@ -48,7 +48,7 @@ final class TodayMultipleAppsController: BaseListController {
         } else {
             collectionView.isScrollEnabled = false
         }
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellID)
     }
     

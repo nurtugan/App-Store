@@ -22,6 +22,6 @@ final class ReviewRowCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 }

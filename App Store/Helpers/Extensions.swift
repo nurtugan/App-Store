@@ -24,6 +24,11 @@ extension UIImageView {
         self.clipsToBounds = true
         self.contentMode = .scaleAspectFill
     }
+    
+    func setImage(with urlString: String?) {
+        let url = URL(string: urlString ?? "")
+        sd_setImage(with: url)
+    }
 }
 
 extension UIButton {

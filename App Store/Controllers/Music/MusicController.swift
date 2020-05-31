@@ -34,7 +34,7 @@ final class MusicController: BaseListController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! TrackCell
         let track = results[indexPath.item]
         cell.nameLabel.text = track.trackName
-        cell.imageView.sd_setImage(with: URL(string: track.artworkUrl100))
+        cell.imageView.setImage(with: track.artworkUrl100)
         cell.subTitleLabel.text = "\(track.artistName ?? "") • \(track.collectionName ?? "")"
         
         if indexPath.item == results.count - 1 && !isPaginating {

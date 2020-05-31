@@ -12,10 +12,10 @@ final class AppsPageController: BaseListController {
     private let cellID = "cellID"
     private let headerID = "headerID"
     
-    var socialApps: [SocialApp] = []
-    var groups: [AppGroup] = []
+    private var socialApps: [SocialApp] = []
+    private var groups: [AppGroup] = []
     
-    let activityIndicatorView: UIActivityIndicatorView = {
+    private let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .large)
         aiv.color = .black
         aiv.startAnimating()
@@ -26,7 +26,7 @@ final class AppsPageController: BaseListController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         

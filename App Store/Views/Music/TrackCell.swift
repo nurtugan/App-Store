@@ -22,7 +22,6 @@ final class TrackCell: UICollectionViewCell {
         super.init(frame: frame)
         
         imageView.image = nil
-//        imageView.constrainWidth(constant: 80)
         imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1).isActive = true
         
         let stackView = UIStackView(arrangedSubviews: [
@@ -41,6 +40,6 @@ final class TrackCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 }

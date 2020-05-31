@@ -16,7 +16,7 @@ final class AppsHeaderHorizontalController: HorizontalSnappingController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
@@ -30,7 +30,7 @@ final class AppsHeaderHorizontalController: HorizontalSnappingController {
         let app = socialsApps[indexPath.item]
         cell.companyLabel.text = app.name
         cell.titleLabel.text = app.tagline
-        cell.imageView.sd_setImage(with: URL(string: app.imageUrl))
+        cell.imageView.setImage(with: app.imageUrl)
         return cell
     }
 }

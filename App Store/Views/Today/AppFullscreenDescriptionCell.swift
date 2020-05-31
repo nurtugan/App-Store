@@ -43,10 +43,11 @@ final class AppFullscreenDescriptionCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubview(descriptionLabel)
-        descriptionLabel.fillSuperview(padding: .init(top: 24, left: 24, bottom: 24, right: 24))
+        let padding: CGFloat = 24
+        descriptionLabel.fillSuperview(padding: .init(top: padding, left: padding, bottom: padding, right: padding))
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 }

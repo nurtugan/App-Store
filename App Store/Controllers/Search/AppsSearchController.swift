@@ -10,7 +10,6 @@ import UIKit
 import SDWebImage
 
 final class AppsSearchController: BaseListController {
-    
     private let cellID = "CellID"
     private var appResults: [Result] = []
     private var timer: Timer?
@@ -27,7 +26,7 @@ final class AppsSearchController: BaseListController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellID)
         
         collectionView.addSubview(enterSearchTermLabel)

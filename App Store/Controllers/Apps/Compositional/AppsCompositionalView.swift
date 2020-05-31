@@ -26,7 +26,7 @@ final class CompositionalHeader: UICollectionReusableView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -37,23 +37,20 @@ final class CompositionalController: UICollectionViewController {
     
     private static let cellWidth: CGFloat = 0.9
     
-    private var socialApps: [SocialApp] = []
-    private var gamesGroup: AppGroup?
-    private var topGrossingApps: AppGroup?
-    private var freeApps: AppGroup?
-    
     private lazy var diffableDataSource: UICollectionViewDiffableDataSource<AppSection, AnyHashable> = .init(collectionView: collectionView) { collectionView, indexPath, object -> UICollectionViewCell? in
-        if let object = object as? SocialApp {
+        switch object {
+        case let object as SocialApp:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.headerID, for: indexPath) as! AppsHeaderCell
             cell.socialApp = object
             return cell
-        } else if let object = object as? FeedResult {
+        case let object as FeedResult:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.defaultCellID, for: indexPath) as! AppRowCell
             cell.app = object
             cell.getButton.addTarget(self, action: #selector(self.handleGet), for: .primaryActionTriggered)
             return cell
+        default:
+            return nil
         }
-        return nil
     }
     
     init() {
@@ -82,7 +79,7 @@ final class CompositionalController: UICollectionViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Static methods
@@ -114,8 +111,6 @@ final class CompositionalController: UICollectionViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = .init(title: "Fetch Top Free", style: .plain, target: self, action: #selector(handleFetchTopFree))
         
-//        fetchApps()
-        
         setupDiffableDataSource()
     }
     
@@ -123,10 +118,13 @@ final class CompositionalController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var appID = ""
         let object = diffableDataSource.itemIdentifier(for: indexPath)
-        if let object = object as? SocialApp {
+        switch object {
+        case let object as SocialApp:
             appID = object.id
-        } else if let object = object as? FeedResult {
+        case let object as FeedResult:
             appID = object.id
+        default:
+            break
         }
         let appDetailController = AppDetailController(appID: appID)
         navigationController?.pushViewController(appDetailController, animated: true)
@@ -152,26 +150,7 @@ final class CompositionalController: UICollectionViewController {
             }
             return header
         }
-        
-        Service.shared.fetchSocialApps { socialApps, error in
-            Service.shared.fetchTopGrossing { appGroup, error in
-                Service.shared.fetchGames { gamesGroup, error in
-                    var snapshot = self.diffableDataSource.snapshot()
-                    
-                    snapshot.appendSections([.topSocial, .games, .grossing])
-                    
-                    snapshot.appendItems(socialApps ?? [], toSection: .topSocial)
-                    
-                    let objects = appGroup?.feed.results ?? []
-                    snapshot.appendItems(objects, toSection: .grossing)
-                    
-                    let games = gamesGroup?.feed.results ?? []
-                    snapshot.appendItems(games, toSection: .games)
-                    
-                    self.diffableDataSource.apply(snapshot)
-                }
-            }
-        }
+        fetchApps()
     }
     
     @objc
@@ -211,32 +190,45 @@ final class CompositionalController: UICollectionViewController {
     private func fetchApps() {
         let dispatchGroup = DispatchGroup()
         
+        var socialApps: [SocialApp] = []
+        var gamesGroup: AppGroup?
+        var topGrossingGroup: AppGroup?
+        
         dispatchGroup.enter()
         Service.shared.fetchGames { appGroup, error in
-            self.gamesGroup = appGroup
+            gamesGroup = appGroup
             dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
         Service.shared.fetchTopGrossing { appGroup, error in
-            self.topGrossingApps = appGroup
-            dispatchGroup.leave()
-        }
-        
-        dispatchGroup.enter()
-        Service.shared.fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-free/all/25/explicit.json") { appGroup, error in
-            self.freeApps = appGroup
+            topGrossingGroup = appGroup
             dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
         Service.shared.fetchSocialApps { apps, error in
+            socialApps = apps ?? []
             dispatchGroup.leave()
-            self.socialApps = apps ?? []
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.collectionView.reloadData()
+            var snapshot = self.diffableDataSource.snapshot()
+            
+            snapshot.appendSections([.topSocial])
+            snapshot.appendItems(socialApps, toSection: .topSocial)
+            
+            if let objects = topGrossingGroup?.feed.results {
+                snapshot.appendSections([.grossing])
+                snapshot.appendItems(objects, toSection: .grossing)
+            }
+            
+            if let objects = gamesGroup?.feed.results {
+                snapshot.appendSections([.games])
+                snapshot.appendItems(objects, toSection: .games)
+            }
+            
+            self.diffableDataSource.apply(snapshot)
         }
     }
 }
@@ -246,7 +238,6 @@ struct AppsView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
         let controller = CompositionalController()
-        controller.view.backgroundColor = .systemRed
         return UINavigationController(rootViewController: controller)
     }
     

@@ -9,12 +9,11 @@
 import UIKit
 
 final class AppsHeaderCell: UICollectionViewCell {
-    
     var socialApp: SocialApp! {
         didSet {
             companyLabel.text = socialApp.name
             titleLabel.text = socialApp.tagline
-            imageView.sd_setImage(with: URL(string: socialApp.imageUrl))
+            imageView.setImage(with: socialApp.imageUrl)
         }
     }
     
