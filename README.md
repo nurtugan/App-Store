@@ -155,3 +155,11 @@ App architecture: __MVCS__
   </tr>
 </tbody>
 </table>
+
+## Support
+
+If you have a question, find a bug, or just want to say hi, please open an [issue on GitHub](https://github.com/nurtugan/App-Store/issues/new).
+
+## License
+
+[MIT License](./LICENSE.md) © Nurtugan Nuraly
