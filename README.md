@@ -156,6 +156,10 @@ App architecture: __MVCS__
 </tbody>
 </table>
 
+
+## Credits
++ [AppStore JSON APIs course [LBTA]](https://www.letsbuildthatapp.com/course/AppStore%20JSON%20APIs)
+
 ## Support
 
 If you have a question, find a bug, or just want to say hi, please open an [issue on GitHub](https://github.com/nurtugan/App-Store/issues/new).
